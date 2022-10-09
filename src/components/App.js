@@ -1,18 +1,25 @@
+import React, { useState } from "react";
 import video from "../data/video.js";
+import Video from "./Video.js";
+import VideoInfo from "./VideoInfo.js";
+import VideoForm from "./VideoForm";
+import CommentsList from "./CommentsList"
 
 function App() {
-  console.log("Here's your data:", video);
+  const [hideComment, setHideComment] = useState(false)
+
 
   return (
     <div className="App">
-      <iframe
-        width="919"
-        height="525"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        frameBorder="0"
-        allowFullScreen
-        title="Thinking in React"
+      <Video />
+      <VideoInfo title={video.title} views={video.views} uploadDate={video.createdAt} />
+      <VideoForm
+        upvotes={video.upvotes}
+        downvotes={video.downvotes}
+        hideComment={hideComment}
+        setHideComment={setHideComment}
       />
+      <CommentsList commentCount={video.comments.length} comments={video.comments} hideComment={hideComment} />
     </div>
   );
 }
